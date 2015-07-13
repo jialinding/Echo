@@ -1,0 +1,36 @@
+extends layout
+
+block content
+	#info
+		h1 Echo
+
+		form#form-add-event(name='addevent',method='post',action='/addevent')
+			input#input-title(type='text', placeholder='event', name='title')
+			br
+			input#input-location(type='text', placeholder='location', name='location')
+			br
+			textarea#input-description(placeholder='description', name='description')
+			br
+			input#input-location-lat(type='hidden', name='lat')
+			input#input-location-lng(type='hidden', name='lng')
+			button#btn-submit(type='submit') Submit
+
+		table#table-events
+			thead
+				tr
+					td Title
+					td Location
+					td Delete
+			tbody
+				each e, i in events
+					tr
+						td #{e.title}
+						td #{e.location}
+						td
+							a(href='/deleteevent/' + e._id) Delete
+
+	#map
+		div#map-canvas(style='width: 100%; height: 600px')
+
+	script(type='text/javascript').
+		var events = !{JSON.stringify(events)}

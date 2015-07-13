@@ -1,0 +1,27 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+input, textarea {
+	width: 400px;
+	margin: 2px;
+}
+
+table, th, td {
+	border: 1px solid black;
+}
+
+#info {
+	float: left;
+	width: 40%;
+}
+
+#map {
+	float: right;
+	width: 60%;
+}
