@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	-if (message)
+		div #{message}
+
+	form#form-signup(name='signup',method='post',action='/signup')
+		label Email:
+		input#input-email(type='text', placeholder='email', name='email')
+		br
+		label Password:
+		input#input-password(type='text', placeholder='password', name='password')
+		br
+		button#btn-submit(type='submit') Sign up

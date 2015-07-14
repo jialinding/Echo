@@ -1,0 +1,16 @@
+extends layout
+
+block content
+	-if (message)
+		div #{message}
+
+	form#form-login(name='login',method='post',action='/login')
+		label Email:
+		input#input-email(type='text', placeholder='email', name='email')
+		br
+		label Password:
+		input#input-password(type='text', placeholder='password', name='password')
+		br
+		button#btn-submit(type='submit') Login
+
+	a(href="/auth/facebook") Facebook
