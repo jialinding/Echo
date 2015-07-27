@@ -8,7 +8,9 @@ var eventSchema = mongoose.Schema({
     location: String,
     description: String,
     lat: Number,
-    lng: Number
+    lng: Number,
+    creator: String,
+    attendees: [String]
 
 });
 

@@ -26,8 +26,11 @@ var userSchema = mongoose.Schema({
         token        : String,
         email        : String,
         name         : String
+    },
+    events: {
+        created: [String],
+        attended: [String]
     }
-
 });
 
 // methods ======================

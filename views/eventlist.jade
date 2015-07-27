@@ -1,0 +1,16 @@
+extends layout
+
+block content
+	table#table-events
+			thead
+				tr
+					td Title
+					td Location
+					td Event Page
+			tbody
+				each e, i in events
+					tr
+						td #{e.title}
+						td #{e.location}
+						td
+							a(href='/e/' + e._id) Page

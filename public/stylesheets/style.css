@@ -1,10 +1,65 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+html, body, #map-canvas {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#wrapper {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+}
+
+#content {
+	position: absolute;
+	bottom: 0;
+	/* Firefox */
+	height: -moz-calc(100% - 50px);
+	/* WebKit */
+	height: -webkit-calc(100% - 50px);
+	/* Opera */
+	height: -o-calc(100% - 50px);
+	/* Standard */
+	height: calc(100% - 50px);
+	width: 100%;
 }
 
 a {
   color: #00B7FF;
+}
+
+/* Navigation bar */
+#navigation-bar {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 50px;
+	z-index: 1;
+	background-color: white;
+}
+
+#navigation-bar h1 {
+	display: inline;
+}
+
+#navigation-bar ul {
+	list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#navigation-bar li {
+	display: inline;
+	margin-right: 3px;
+}
+
+#logout {
+	float: right;
 }
 
 input, textarea {
@@ -19,9 +74,13 @@ table, th, td {
 #info {
 	float: left;
 	width: 40%;
+	overflow: auto;
 }
 
 #map {
+	position: fixed;
+	right: 0;
 	float: right;
 	width: 60%;
+	height: 100%;
 }

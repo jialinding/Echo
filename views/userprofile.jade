@@ -1,0 +1,36 @@
+extends layout
+
+block content
+	ul#user-data
+		li Username: #{user.facebook.name}
+		li Email: #{user.local.email}
+
+	h2 Events Created
+	table#table-user-events-created
+			thead
+				tr
+					td Title
+					td Location
+					td Event Page
+			tbody
+				each e, i in eventsCreated
+					tr
+						td #{e.title}
+						td #{e.location}
+						td
+							a(href='/e/' + e._id) Event
+
+	h2 Events Attended
+	table#table-user-events-attended
+			thead
+				tr
+					td Title
+					td Location
+					td Event Page
+			tbody
+				each e, i in eventsAttended
+					tr
+						td #{e.title}
+						td #{e.location}
+						td
+							a(href='/e/' + e._id) Event

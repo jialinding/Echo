@@ -1,0 +1,16 @@
+extends layout
+
+block content
+	table#table-users
+			thead
+				tr
+					td User
+					td Email
+					td Profile
+			tbody
+				each u, i in users
+					tr
+						td #{u.facebook.name}
+						td #{u.local.email}
+						td
+							a(href='/u/' + u._id) Profile

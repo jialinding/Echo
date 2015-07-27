@@ -1,16 +1,21 @@
-extends layout
+doctype html
+html
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
+		script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBVN0fJ683nkiLuAoakgD-3neR1MLU17EY&libraries=places')
+	body
+		-if (message)
+			div #{message}
 
-block content
-	-if (message)
-		div #{message}
+		form#form-login(name='login',method='post',action='/login')
+			label Email:
+			input#input-email(type='text', placeholder='email', name='email')
+			br
+			label Password:
+			input#input-password(type='text', placeholder='password', name='password')
+			br
+			button#btn-submit(type='submit') Login
 
-	form#form-login(name='login',method='post',action='/login')
-		label Email:
-		input#input-email(type='text', placeholder='email', name='email')
-		br
-		label Password:
-		input#input-password(type='text', placeholder='password', name='password')
-		br
-		button#btn-submit(type='submit') Login
-
-	a(href="/auth/facebook") Facebook
+		a(href="/auth/facebook") Facebook

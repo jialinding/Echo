@@ -1,14 +1,19 @@
-extends layout
+doctype html
+html
+	head
+		title= title
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
+		script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBVN0fJ683nkiLuAoakgD-3neR1MLU17EY&libraries=places')
+	body
+		-if (message)
+			div #{message}
 
-block content
-	-if (message)
-		div #{message}
-
-	form#form-signup(name='signup',method='post',action='/signup')
-		label Email:
-		input#input-email(type='text', placeholder='email', name='email')
-		br
-		label Password:
-		input#input-password(type='text', placeholder='password', name='password')
-		br
-		button#btn-submit(type='submit') Sign up
+		form#form-signup(name='signup',method='post',action='/signup')
+			label Email:
+			input#input-email(type='text', placeholder='email', name='email')
+			br
+			label Password:
+			input#input-password(type='text', placeholder='password', name='password')
+			br
+			button#btn-submit(type='submit') Sign up

@@ -1,0 +1,36 @@
+extends layout
+
+block content
+	ul#event-data
+		li Title: #{event.title}
+		li Location: #{event.location}
+		li Description: #{event.description}
+
+	h2 Event Creator
+	table#table-event-creator
+			thead
+				tr
+					td Username
+					td Email
+					td Profile
+			tbody
+				tr
+					td #{creator.facebook.name}
+					td #{creator.local.email}
+					td
+						a(href='/u/' + creator._id) Profile
+
+	h2 Event Attendees
+	table#table-event-attendees
+			thead
+				tr
+					td Username
+					td Email
+					td Profile
+			tbody
+				for u, i in attendees
+					tr
+						td #{u.facebook.name}
+						td #{u.local.email}
+						td
+							a(href='/u/' + u._id) Profile

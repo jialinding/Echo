@@ -3,8 +3,20 @@ html
 	head
 		title= title
 		link(rel='stylesheet', href='/stylesheets/style.css')
-	body
-		block content
 		script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
 		script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBVN0fJ683nkiLuAoakgD-3neR1MLU17EY&libraries=places')
-		script(src='/javascripts/global.js')
+	body
+		div#wrapper
+			div#navigation-bar
+				h1 Echo
+				ul
+					li#nav-home
+						a(href='/') Home
+					li#nav-userlist
+						a(href='/userlist') Users
+					li#nav-eventslist
+						a(href='/eventslist') Events
+					li#logout
+						a(href='/logout') Logout
+			div#content
+				block content
