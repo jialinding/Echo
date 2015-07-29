@@ -33,6 +33,11 @@ a {
   color: #00B7FF;
 }
 
+h4 {
+	margin: 0;
+	padding: 0;
+}
+
 /* Navigation bar */
 #navigation-bar {
 	position: fixed;
@@ -65,6 +70,14 @@ a {
 input, textarea {
 	width: 400px;
 	margin: 2px;
+}
+
+#input-start-time {
+	width: 325px;
+}
+
+#input-start-day {
+	width: 65px;
 }
 
 table, th, td {

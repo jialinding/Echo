@@ -11,6 +11,9 @@ block content
 				each u, i in users
 					tr
 						td #{u.facebook.name}
-						td #{u.local.email}
+						if u.local.email
+							td #{u.local.email}
+						else
+							td #{u.facebook.email}
 						td
 							a(href='/u/' + u._id) Profile

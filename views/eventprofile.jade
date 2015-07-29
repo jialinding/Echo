@@ -4,6 +4,7 @@ block content
 	ul#event-data
 		li Title: #{event.title}
 		li Location: #{event.location}
+		li#start-datetime
 		li Description: #{event.description}
 
 	h2 Event Creator
@@ -16,7 +17,10 @@ block content
 			tbody
 				tr
 					td #{creator.facebook.name}
-					td #{creator.local.email}
+					if creator.local.email
+						td #{creator.local.email}
+					else
+						td #{creator.facebook.email}
 					td
 						a(href='/u/' + creator._id) Profile
 
@@ -31,6 +35,13 @@ block content
 				for u, i in attendees
 					tr
 						td #{u.facebook.name}
-						td #{u.local.email}
+						if u.local.email
+							td #{u.local.email}
+						else
+							td #{u.facebook.email}
 						td
 							a(href='/u/' + u._id) Profile
+
+	script(src='/javascripts/eventprofile.js')
+	script(type='text/javascript').
+		var e = !{JSON.stringify(event)}

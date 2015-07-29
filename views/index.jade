@@ -6,11 +6,15 @@ block content
 			input#input-title(type='text', placeholder='event', name='title')
 			br
 			input#input-location(type='text', placeholder='location', name='location')
+			input#input-location-lat(type='hidden', name='lat')
+			input#input-location-lng(type='hidden', name='lng')
+			br
+			input#input-start-time(type='text', placeholder='time', name='start-time')
+			input#input-start-day(type='text', name='start-day', readonly='readonly')
+			input#input-start-datetime(type='hidden', name='start-datetime')
 			br
 			textarea#input-description(placeholder='description', name='description')
 			br
-			input#input-location-lat(type='hidden', name='lat')
-			input#input-location-lng(type='hidden', name='lng')
 			button#btn-submit(type='submit') Submit
 
 		h3 My Events
@@ -43,7 +47,9 @@ block content
 	#map
 		div#map-canvas(style='height: 100%; width: 100%')
 
+	link(rel='stylesheet', href='/stylesheets/vendor/timepicker.css')
 	script(src='/javascripts/index.js')
+	script(src='/javascripts/vendor/timepicker.js')
 	script(type='text/javascript').
 		var events = !{JSON.stringify(events)}
 		var user = !{JSON.stringify(user)}

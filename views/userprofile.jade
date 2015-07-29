@@ -3,7 +3,10 @@ extends layout
 block content
 	ul#user-data
 		li Username: #{user.facebook.name}
-		li Email: #{user.local.email}
+		if user.local.email
+			li Email: #{user.local.email}
+		else
+			li Email: #{user.facebook.email}
 
 	h2 Events Created
 	table#table-user-events-created

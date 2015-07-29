@@ -68,6 +68,8 @@ router.post('/addevent', function(req, res) {
     var eventDescription = req.body.description;
     var eventLat = req.body.lat;
     var eventLng = req.body.lng;
+    var eventStartDatetime = req.body.startDatetime;
+    var eventExpireAt = req.body.expireAt;
 
     var newEvent = new Event();
 
@@ -77,6 +79,9 @@ router.post('/addevent', function(req, res) {
     newEvent.lat = eventLat;
     newEvent.lng = eventLng;
     newEvent.creator = req.body.user;
+    newEvent.startTime = req.body.startTime;
+    newEvent.startDatetime = eventStartDatetime;
+    newEvent.expireAt = eventExpireAt;
 
     // save the event
     newEvent.save(function(err, newEvent) {
@@ -99,24 +104,30 @@ router.delete('/deleteevent/:id', function(req, res) {
     // Get our form values. These rely on the 'name' attributes
     var eventId = req.params.id;
 
-    Event.findById(eventId, function (err, event) {
-        User.findById(event.creator, function (err, user) {
-            var index = user.events.created.indexOf(eventId);
-            user.events.created.splice(index, 1);
-            user.save();
-        })
-    });
+    // Event.findById(eventId, function (err, event) {
+    //     User.findById(event.creator, function (err, user) {
+    //         var index = user.events.created.indexOf(eventId);
+    //         user.events.created.splice(index, 1);
+    //         user.save();
+    //     })
+    // });
 
-    Event.findByIdAndRemove(eventId, function (err) {
-        if (err) {
-            // If it failed, return error
-            res.send('There was a problem adding the information to the database.');
-        }
-        else {
-            // And forward to success page
-            res.redirect(303, '/');
-        }
-    });
+    // Event.findByIdAndRemove(eventId, function (err) {
+    //     if (err) {
+    //         // If it failed, return error
+    //         res.send('There was a problem adding the information to the database.');
+    //     }
+    //     else {
+    //         // And forward to success page
+    //         res.redirect(303, '/');
+    //     }
+    // });
+
+    // Event.remove({ _id: eventId }).exec();
+    Event.findOne({ _id: eventId }, function (err, doc) {
+        doc.remove();
+    })
+    res.redirect(303, '/');
 });
 
 router.put('/attendevent/:id', function(req, res) {

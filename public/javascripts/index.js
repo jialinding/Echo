@@ -49,11 +49,11 @@ function initializeGeolocationMarker() {
 function initializeEventMarkers() {
     $(events).each(function () {
         if (this.creator === user._id) {
-            addEventMarker(this.title, this.description, this.lat, this.lng, this._id, 'blue');
+            addEventMarker(this.title, this.startTime, this.description, this.lat, this.lng, this._id, 'blue');
         } else if (this.attendees.indexOf(user._id) > -1) {
-            addEventMarker(this.title, this.description, this.lat, this.lng, this._id, 'green');
+            addEventMarker(this.title, this.startTime, this.description, this.lat, this.lng, this._id, 'green');
         } else {
-            addEventMarker(this.title, this.description, this.lat, this.lng, this._id, 'yellow');
+            addEventMarker(this.title, this.startTime, this.description, this.lat, this.lng, this._id, 'yellow');
         }
     });
 }
@@ -75,7 +75,7 @@ function initializeSearchBox() {
     });
 }
 
-function addEventMarker(title, description, lat, lng, id, color) {
+function addEventMarker(title, startTime, description, lat, lng, id, color) {
     var latLng = new google.maps.LatLng(lat, lng);
     var marker = new google.maps.Marker({
         map: map,
@@ -86,7 +86,9 @@ function addEventMarker(title, description, lat, lng, id, color) {
     marker.setMap(map);
     eventMarkers[id] = marker;
 
-    var infoWindowContent = '<h4><a href="/e/' + id + '">' + title + '</a></h4>' + description;
+    var infoWindowContent = '<h4><a href="/e/' + id + '">' + title + '</a></h4><br>' +
+        startTime + '<br>' +
+        description;
     marker.info = new google.maps.InfoWindow({
         content: infoWindowContent,
     });
@@ -154,6 +156,9 @@ function addEvent(e) {
     var description = $('#input-description').val();
     var lat = $('#input-location-lat').val();
     var lng = $('#input-location-lng').val();
+    var startTime = $('#input-start-time').val();
+    var startDatetime = moment($('#input-start-datetime').val()).toDate();
+    var expireAt = moment($('#input-start-datetime').val()).add(30, 'minutes').toDate();
 
     $.ajax({
         type: 'POST',
@@ -164,10 +169,13 @@ function addEvent(e) {
             description: description,
             lat: lat,
             lng: lng,
+            startTime: startTime,
+            startDatetime: startDatetime,
+            expireAt: expireAt,
             user: user._id
         },
         success: function (res) {
-            addEventMarker(title, description, lat, lng, res, 'blue');
+            addEventMarker(title, startTime, description, lat, lng, res, 'blue');
             addToEventsCreated(title, location, res);
         }
     });
@@ -216,8 +224,32 @@ function unattendEvent(e) {
     });
 }
 
+function handleStartTime() {
+    var startTimeInput = $('#input-start-time').val();
+    if (startTimeInput === '') {
+        $('#input-start-day').val('');
+        return;  
+    }
+
+    var now = moment();
+    var currentDate = now.format('YYYY-MM-DD ');
+    var startTime = moment(currentDate + $('#input-start-time').val(), 'YYYY-MM-DD hh:mm a');
+    
+    if (moment(startTime).isBefore(now, 'minute')) {
+        $('#input-start-day').val('tomorrow');
+        $('#input-start-datetime').val(startTime.add(1, 'days').format());
+    } else {
+        $('#input-start-day').val('today');
+        $('#input-start-datetime').val(startTime.format());
+    }
+}
+
 $(document).ready(function() {
     initalizeTables();
+    $('#input-start-time').timepicker({
+        timeFormat: 'hh:mm tt'
+    });
+    $('#input-start-time').on('change', handleStartTime);
     $('#form-add-event').on('submit', addEvent);
     $(document).on('click', '.delete-event', deleteEvent);
     $(document).on('click', '.attend-event', attendEvent);

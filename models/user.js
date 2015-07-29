@@ -30,7 +30,7 @@ var userSchema = mongoose.Schema({
     events: {
         created: [String],
         attended: [String]
-    }
+    },
 });
 
 // methods ======================
