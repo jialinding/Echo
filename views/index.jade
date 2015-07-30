@@ -2,20 +2,7 @@ extends layout
 
 block content
 	#info
-		form#form-add-event(name='addevent')
-			input#input-title(type='text', placeholder='event', name='title')
-			br
-			input#input-location(type='text', placeholder='location', name='location')
-			input#input-location-lat(type='hidden', name='lat')
-			input#input-location-lng(type='hidden', name='lng')
-			br
-			input#input-start-time(type='text', placeholder='time', name='start-time')
-			input#input-start-day(type='text', name='start-day', readonly='readonly')
-			input#input-start-datetime(type='hidden', name='start-datetime')
-			br
-			textarea#input-description(placeholder='description', name='description')
-			br
-			button#btn-submit(type='submit') Submit
+		a#create-modal(href='#') Create Event
 
 		h3 My Events
 		table#table-events-created
@@ -47,8 +34,32 @@ block content
 	#map
 		div#map-canvas(style='height: 100%; width: 100%')
 
+block extra
+	div#overlay
+	div#modal
+		div#modal-content
+			h3 Create an Event
+			form#form-add-event(name='addevent')
+				input#input-title(type='text', placeholder='event', name='title')
+				br
+				input#input-location(type='text', placeholder='location', name='location')
+				input#input-location-lat(type='hidden', name='lat')
+				input#input-location-lng(type='hidden', name='lng')
+				br
+				input#input-start-time(type='text', placeholder='time', name='start-time')
+				input#input-start-day(type='text', name='start-day', readonly='readonly')
+				input#input-start-datetime(type='hidden', name='start-datetime')
+				br
+				textarea#input-description(placeholder='description', name='description')
+				br
+				button#btn-submit(type='submit') Submit
+				button#btn-cancel(type='button') Cancel
+		a#close(href='#')
+
 	link(rel='stylesheet', href='/stylesheets/vendor/timepicker.css')
+	link(rel='stylesheet', href='/stylesheets/modal.css')
 	script(src='/javascripts/index.js')
+	script(src='/javascripts/modal.js')
 	script(src='/javascripts/vendor/timepicker.js')
 	script(type='text/javascript').
 		var events = !{JSON.stringify(events)}

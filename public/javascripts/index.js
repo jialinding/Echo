@@ -250,7 +250,6 @@ $(document).ready(function() {
         timeFormat: 'hh:mm tt'
     });
     $('#input-start-time').on('change', handleStartTime);
-    $('#form-add-event').on('submit', addEvent);
     $(document).on('click', '.delete-event', deleteEvent);
     $(document).on('click', '.attend-event', attendEvent);
     $(document).on('click', '.unattend-event', unattendEvent);
